@@ -1,6 +1,6 @@
 import cv2
-n1 = 2
-n2 = 4
+n1 = 4
+n2 = 2
 cam1 = cv2.VideoCapture(n1)
 cam2 = cv2.VideoCapture(n2)
 
