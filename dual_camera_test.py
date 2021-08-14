@@ -4,6 +4,7 @@ n2 = 4
 cam1 = cv2.VideoCapture(n1)
 cam2 = cv2.VideoCapture(n2)
 
+
 while True:
     ret1, frame1 = cam1.read()
     ret2, frame2 = cam2.read()
