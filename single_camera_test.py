@@ -1,6 +1,7 @@
 import cv2
-n = 1
-cam1 = cv2.VideoCapture(n,cv2.CAP_DSHOW)
+n = 4
+
+cam1 = cv2.VideoCapture(n)#,cv2.CAP_DSHOW)
 cam1.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
 cam1.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 # cam1.set(cv2.CAP_PROP_FRAME_COUNT,3)
@@ -11,10 +12,11 @@ while True:
     if not ret1:
         print("failed to grab frame")
         break
-    # if(not(n == 0)):
-    #     frame1 = cv2.cvtColor(frame1,cv2.COLOR_BGR2RGB)
+
+    if(not(n == 0)):
+        frame1 = cv2.cvtColor(frame1,cv2.COLOR_BGR2RGB)
     print(frame1.shape)
-    cv2.imshow("cam1",frame1[::-1])
+    cv2.imshow("cam1",frame1)
 
 
     k = cv2.waitKey(1)
