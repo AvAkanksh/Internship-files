@@ -1,2 +1,0 @@
-
-# cam1.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080
