@@ -18,6 +18,7 @@ stereoMapR_y = cv_file.getNode('stereoMapR_y').mat()
 
 n1 = 4
 n2 = 2
+num = 0
 
 factor = 0.25
 
@@ -48,7 +49,14 @@ while(cam1.isOpened() and cam2.isOpened()):
     # cv2.imshow("frame left", frame_left)
     cv2.imshow("final", final)
 
+
     k = cv2.waitKey(5)
+
+    if k == ord('s'):
+        cv2.imwrite('./my_stereo_images/test_dataset/'+str(num)+'l.png',frame_left)
+        cv2.imwrite('./my_stereo_images/test_dataset/'+str(num)+'r.png',frame_right)
+        print('Image ',num,' taken!')
+        num+=1
 
     if k == 27:
         break

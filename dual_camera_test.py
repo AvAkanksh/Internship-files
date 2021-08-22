@@ -4,7 +4,7 @@ import cv2
 n1 = 2
 n2 = 4
 
-factor = 0.25
+factor = 0.5
 
 cam1 = cv2.VideoCapture(n1)#,cv2.CAP_DSHOW)
 cam2 = cv2.VideoCapture(n2)#,cv2.CAP_DSHOW)

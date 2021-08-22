@@ -3,7 +3,8 @@ import time
 
 n1 = 2
 n2 = 4
-
+count = 10
+interval = 1.75
 cap = cv2.VideoCapture(n1)#,cv2.CAP_DSHOW)
 cap2 = cv2.VideoCapture(n2)#,cv2.CAP_DSHOW)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
@@ -29,10 +30,10 @@ while cap.isOpened():
     final = cv2.hconcat([frame1_resized,frame2_resized])
     k = cv2.waitKey(5)
 
-    if k == 27 or num==25:
+    if k == 27 or num==count:
         break
     # elif k == ord('s'): # wait for 's' key to save and exit
-    if(x%20==0 and time.time()-start_time>5):
+    if(x%40*interval==0 and time.time()-start_time>5):
         cv2.imwrite('./my_stereo_images/stereoLeft/' + str(num) + 'l.png', frame1)
         cv2.imwrite('./my_stereo_images/stereoRight/' + str(num) + 'r.png', frame2)
         print("images saved!")
