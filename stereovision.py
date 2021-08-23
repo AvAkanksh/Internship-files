@@ -20,7 +20,7 @@ n1 = 4
 n2 = 2
 num = 0
 
-factor = 0.25
+factor = 0.5
 
 cam1 = cv2.VideoCapture(n1)#,cv2.CAP_DSHOW)
 cam2 = cv2.VideoCapture(n2)#,cv2.CAP_DSHOW)
@@ -54,7 +54,9 @@ while(cam1.isOpened() and cam2.isOpened()):
 
     if k == ord('s'):
         cv2.imwrite('./my_stereo_images/test_dataset/'+str(num)+'l.png',frame_left)
+        cv2.imwrite('../stereo_images/my_stereo_images/test_dataset/'+str(num)+'l.png',frame_left)
         cv2.imwrite('./my_stereo_images/test_dataset/'+str(num)+'r.png',frame_right)
+        cv2.imwrite('../stereo_images/my_stereo_images/test_dataset/'+str(num)+'r.png',frame_right)
         print('Image ',num,' taken!')
         num+=1
 

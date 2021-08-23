@@ -15,7 +15,7 @@ start_time = time.time()
 num = 0
 x = 0
 
-factor = 0.25
+factor = 0.5
 
 
 
@@ -189,7 +189,7 @@ n1 = 4
 n2 = 2
 num = 0
 
-factor = 0.25
+
 
 cam1 = cv2.VideoCapture(n1)#,cv2.CAP_DSHOW)
 cam2 = cv2.VideoCapture(n2)#,cv2.CAP_DSHOW)
