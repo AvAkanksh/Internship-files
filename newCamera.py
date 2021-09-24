@@ -44,9 +44,8 @@ cam.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 num = 0
 while True:
     res, frame = cam.read()
-    # print(frame.shape)
     frame_resized = cv2.resize(frame, (int(frame.shape[1]*factor),int(frame.shape[0]*factor)), interpolation=cv2.INTER_AREA)
-    frame_resized = epipolarlines(frame_resized,20)
+    # frame_resized = epipolarlines(frame_resized,20)
     mid = int(frame.shape[1]/2)
 
     cv2.imshow('Resized',frame_resized)
@@ -55,7 +54,6 @@ while True:
     # cv2.imshow('Right View',frame[:,mid:])
     k = cv2.waitKey(1)
     if(k == ord('q') or k == 27):
-        os.system('git add . ; git commit -m "updating the files" ; git push')
         break
     if(k == 32):
         cv2.imwrite('./my_stereo_images/newCamImages/'+str(num)+'l.png',frame[:,:mid])
@@ -66,5 +64,6 @@ while True:
 
 cam.release()
 cv2.destroyAllWindows()
+os.system('git add . ; git commit -m "updating the files" ; git push')
 
 
