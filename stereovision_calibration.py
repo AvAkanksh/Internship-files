@@ -2,11 +2,12 @@ import numpy as np
 import cv2 as cv
 import glob
 import time
+import os
 
 ################ FIND CHESSBOARD CORNERS - OBJECT POINTS AND IMAGE POINTS #############################
 
 chessboardSize = (10,7)
-frameSize = (640,480)
+frameSize = (1920,1080)
 
 
 # termination criteria
@@ -107,13 +108,33 @@ rectL, rectR, projMatrixL, projMatrixR, Q, roi_L, roi_R= cv.stereoRectify(newCam
 stereoMapL = cv.initUndistortRectifyMap(newCameraMatrixL, distL, rectL, projMatrixL, grayL.shape[::-1], cv.CV_16SC2)
 stereoMapR = cv.initUndistortRectifyMap(newCameraMatrixR, distR, rectR, projMatrixR, grayR.shape[::-1], cv.CV_16SC2)
 
+
+
+np.save('./camera_params/camera_paramsL',cameraMatrixL)
+np.save('../Stereo-Images/camera_params/camera_paramsL',cameraMatrixL)
+np.save('./camera_params/camera_paramsR',cameraMatrixR)
+np.save('../Stereo-Images/camera_params/camera_paramsR',cameraMatrixR)
+
 print("Saving parameters!")
 cv_file = cv.FileStorage('stereoMap.xml', cv.FILE_STORAGE_WRITE)
-
 cv_file.write('stereoMapL_x',stereoMapL[0])
 cv_file.write('stereoMapL_y',stereoMapL[1])
 cv_file.write('stereoMapR_x',stereoMapR[0])
 cv_file.write('stereoMapR_y',stereoMapR[1])
+
+os.system("cd ../Stereo-Images ;git add . ; git status ; git commit -m 'updating the files' ; git push")
+
+print('*'*100+"\nLeft:")
+print("fx : ",cameraMatrixL[0][0])
+print("fy : ",cameraMatrixL[1][1])
+print("Cx : ",cameraMatrixL[0][2])
+print("Cy : ",cameraMatrixL[1][2])
+
+print('*'*100+"\nRight:")
+print("fx : ",cameraMatrixR[0][0])
+print("fy : ",cameraMatrixR[1][1])
+print("Cx : ",cameraMatrixR[0][2])
+print("Cy : ",cameraMatrixR[1][2])
 
 cv_file.release()
 

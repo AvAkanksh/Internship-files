@@ -1,10 +1,13 @@
 import cv2
-n = 4
 
+n = 4
+img_counter = 0
 cam1 = cv2.VideoCapture(n)#,cv2.CAP_DSHOW)
 cam1.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
 cam1.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 # cam1.set(cv2.CAP_PROP_FRAME_COUNT,3)
+
+
 
 while True:
     ret1, frame1 = cam1.read()
@@ -15,7 +18,7 @@ while True:
 
     if(not(n == 0)):
         frame1 = cv2.cvtColor(frame1,cv2.COLOR_BGR2RGB)
-    print(frame1.shape)
+    # print(frame1.shape)
     cv2.imshow("cam1",frame1)
 
 
@@ -26,8 +29,8 @@ while True:
         break
     elif k%256 == 32:
         # SPACE pressed
-        img_name1 = "opencv_frame1_{}.png".format(img_counter)
-
+        img_name1 = "test{}.png".format(img_counter)
+        img_counter+=1
         cv2.imwrite(img_name1, frame1)
 
         print("{} written!".format(img_name1))

@@ -12,7 +12,7 @@ while cap.isOpened():
     img=cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     img2=cv2.cvtColor(img2, cv2.COLOR_RGB2BGR)
     final = cv2.hconcat([img,img2])
-    k = cv2.waitKey(5)
+    k = cv2.waitKey(1)
 
     if k == 27:
         break

@@ -1,10 +1,15 @@
 import numpy as np
 import cv2
+import os
+
+lines = True
+line_width = 1
+
 
 
 # Camera parameters to undistort and rectify images
 cv_file = cv2.FileStorage()
-cv_file.open('stereoMap.xml', cv2.FileStorage_READ)
+cv_file.open('stereoMap_best2.xml', cv2.FileStorage_READ)
 
 stereoMapL_x = cv_file.getNode('stereoMapL_x').mat()
 stereoMapL_y = cv_file.getNode('stereoMapL_y').mat()
@@ -31,41 +36,61 @@ cam2.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
 while(cam1.isOpened() and cam2.isOpened()):
 
-    succes_right, frame_right = cam1.read()
-    succes_left, frame_left = cam2.read()
-    frame_left = cv2.cvtColor(frame_left, cv2.COLOR_RGB2BGR)
-    frame_right = cv2.cvtColor(frame_right, cv2.COLOR_RGB2BGR)
+    succes_right, frame_right_original = cam1.read()
+    succes_left, frame_left_original = cam2.read()
+    frame_left_original = cv2.cvtColor(frame_left_original, cv2.COLOR_RGB2BGR)
+    frame_right_original = cv2.cvtColor(frame_right_original, cv2.COLOR_RGB2BGR)
 
     # Undistort and rectify images
-    frame_right = cv2.remap(frame_right, stereoMapR_x, stereoMapR_y, cv2.INTER_LANCZOS4, cv2.BORDER_CONSTANT, 0)
-    frame_left = cv2.remap(frame_left, stereoMapL_x, stereoMapL_y, cv2.INTER_LANCZOS4, cv2.BORDER_CONSTANT, 0)
+    frame_right = cv2.remap(frame_right_original, stereoMapR_x, stereoMapR_y, cv2.INTER_LANCZOS4, cv2.BORDER_CONSTANT, 0)
+    frame_left = cv2.remap(frame_left_original, stereoMapL_x, stereoMapL_y, cv2.INTER_LANCZOS4, cv2.BORDER_CONSTANT, 0)
 
     frame1_resized = cv2.resize(frame_right, (int(frame_right.shape[1]*factor),int(frame_right.shape[0]*factor)), interpolation=cv2.INTER_AREA)
     frame2_resized = cv2.resize(frame_left, (int(frame_left.shape[1]*factor),int(frame_left.shape[0]*factor)), interpolation=cv2.INTER_AREA)
+
+    frame1_resized_original = cv2.resize(frame_right_original, (int(frame_right.shape[1]*factor),int(frame_right.shape[0]*factor)), interpolation=cv2.INTER_AREA)
+    frame2_resized_original = cv2.resize(frame_left_original, (int(frame_left.shape[1]*factor),int(frame_left.shape[0]*factor)), interpolation=cv2.INTER_AREA)
+
+
+    final_original = cv2.hconcat([frame1_resized_original,frame2_resized_original])
     final = cv2.hconcat([frame1_resized,frame2_resized])
 
-    # Show the frames
-    # cv2.imshow("frame right", frame_right)
-    # cv2.imshow("frame left", frame_left)
+
+    if(lines):
+        for i in range(int(final.shape[0]/15)):
+            # r , g , b = np.random.randint(0,255),np.random.randint(0,255),np.random.randint(0,255)
+            if i%2 == 0:
+                r , g , b = 255,0,0
+            else:
+                r , g , b = 0,0,255
+
+
+            final = cv2.line(final, (0,i*15), (final.shape[1],i*15), (b,g,r),line_width)
+            final_original = cv2.line(final_original, (0,i*15), (final.shape[1],i*15), (b,g,r),line_width)
+
+    original_plus_rectified = cv2.vconcat([final,final_original])
+
     cv2.imshow("final", final)
+    cv2.imshow("final_original", final_original)
 
 
     k = cv2.waitKey(5)
 
+    if ((k == 27) | ( k==ord('q'))):
+        os.system("cd ../Stereo-Images ;git add . ; git status ; git commit -m 'updating the files' ; git push")
+        break
+
     if k == ord('s'):
         cv2.imwrite('./my_stereo_images/test_dataset/'+str(num)+'l.png',frame_left)
-        cv2.imwrite('../stereo_images/my_stereo_images/test_dataset/'+str(num)+'l.png',frame_left)
+        cv2.imwrite('../Stereo-Images/'+str(num)+'l.png',frame_left)
         cv2.imwrite('./my_stereo_images/test_dataset/'+str(num)+'r.png',frame_right)
-        cv2.imwrite('../stereo_images/my_stereo_images/test_dataset/'+str(num)+'r.png',frame_right)
+        cv2.imwrite('../Stereo-Images/'+str(num)+'r.png',frame_right)
         print('Image ',num,' taken!')
         num+=1
 
-    if k == 27:
-        break
-
     # Hit "q" to close the window
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    # if cv2.waitKey(1) & 0xFF == ord('q'):
+    #     break
 
 
 

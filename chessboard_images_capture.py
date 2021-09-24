@@ -3,7 +3,7 @@ import time
 
 n1 = 2
 n2 = 4
-count = 10
+count = 15
 interval = 1.75
 cap = cv2.VideoCapture(n1)#,cv2.CAP_DSHOW)
 cap2 = cv2.VideoCapture(n2)#,cv2.CAP_DSHOW)
@@ -15,7 +15,7 @@ start_time = time.time()
 num = 0
 x = 0
 
-factor = 0.25
+factor = 0.5
 
 
 

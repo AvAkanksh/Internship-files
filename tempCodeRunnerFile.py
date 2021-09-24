@@ -1,2 +1,1 @@
-
-# cap_right = cv2.VideoCapture(2)
+r_mean*baselength/(u_r - u_l)
