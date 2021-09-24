@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import time
+import os
 
 # VIDEO MODE	OUTPUT RESOLUTION (SIDE BY SIDE)	FRAME RATE (FPS)	FIELD OF VIEW
 # 2.2K	            4416x1242	                          15	            Wide
@@ -54,6 +55,7 @@ while True:
     # cv2.imshow('Right View',frame[:,mid:])
     k = cv2.waitKey(1)
     if(k == ord('q') or k == 27):
+        os.system('git add . ; git commit -m "updating the files" ; git push')
         break
     if(k == 32):
         cv2.imwrite('./my_stereo_images/newCamImages/'+str(num)+'l.png',frame[:,:mid])
