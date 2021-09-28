@@ -36,7 +36,7 @@ def epipolarlines(frame,spacing):
     return frame
 
 
-cam_number = 2
+cam_number = 1
 cam = cv2.VideoCapture(cam_number)
 height , width , factor = heightWidth(3)
 cam.set(cv2.CAP_PROP_FRAME_WIDTH, width)
