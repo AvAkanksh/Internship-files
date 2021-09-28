@@ -1,24 +1,20 @@
 import cv2
 
-n = 4
+n = 0
 img_counter = 0
-cam1 = cv2.VideoCapture(n)#,cv2.CAP_DSHOW)
+cam1 = cv2.VideoCapture(n)
 cam1.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
 cam1.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 # cam1.set(cv2.CAP_PROP_FRAME_COUNT,3)
 
-
-
 while True:
     ret1, frame1 = cam1.read()
-
     if not ret1:
         print("failed to grab frame")
         break
 
     if(not(n == 0)):
         frame1 = cv2.cvtColor(frame1,cv2.COLOR_BGR2RGB)
-    # print(frame1.shape)
     cv2.imshow("cam1",frame1)
 
 
@@ -35,9 +31,5 @@ while True:
 
         print("{} written!".format(img_name1))
 
-
-
 cam1.release()
-
-
 cv2.destroyAllWindows()

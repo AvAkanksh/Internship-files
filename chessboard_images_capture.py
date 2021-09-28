@@ -18,7 +18,6 @@ x = 0
 factor = 0.5
 
 
-
 while cap.isOpened():
 
     succes1, frame1 = cap.read()

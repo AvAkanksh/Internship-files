@@ -9,7 +9,7 @@ line_width = 1
 
 # Camera parameters to undistort and rectify images
 cv_file = cv2.FileStorage()
-cv_file.open('stereoMap_best2.xml', cv2.FileStorage_READ)
+cv_file.open('./camera_params/stereoMap_best2.xml', cv2.FileStorage_READ)
 
 stereoMapL_x = cv_file.getNode('stereoMapL_x').mat()
 stereoMapL_y = cv_file.getNode('stereoMapL_y').mat()

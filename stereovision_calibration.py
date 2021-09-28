@@ -116,7 +116,7 @@ np.save('./camera_params/camera_paramsR',cameraMatrixR)
 np.save('../Stereo-Images/camera_params/camera_paramsR',cameraMatrixR)
 
 print("Saving parameters!")
-cv_file = cv.FileStorage('stereoMap.xml', cv.FILE_STORAGE_WRITE)
+cv_file = cv.FileStorage('./camera_params/stereoMap.xml', cv.FILE_STORAGE_WRITE)
 cv_file.write('stereoMapL_x',stereoMapL[0])
 cv_file.write('stereoMapL_y',stereoMapL[1])
 cv_file.write('stereoMapR_x',stereoMapR[0])

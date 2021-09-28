@@ -107,7 +107,7 @@ while True:
         orig_resized = cv2.resize(orig, (int(orig.shape[1]*factor),int(orig.shape[0]*factor)), interpolation=cv2.INTER_AREA)
         # final = cv2.hconcat([orig_resized , edged_resized])
         k = cv2.waitKey(1)
-        if k == 27 | k == ord('q'):
+        if (k == 27 or k == ord('q')):
             break
     cv2.imshow('Image',orig_resized)
 
