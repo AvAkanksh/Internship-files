@@ -54,11 +54,13 @@ while True:
     # cv2.imshow('Right View',frame[:,mid:])
     k = cv2.waitKey(1)
     fileName = datetime.now().strftime("%d_%m_%y-%H:%M:%S")
+    fileFormats = ['jpg','jpeg','png']
+    fileFormat = fileFormats[0]
     if(k == ord('q') or k == 27):
         break
     if(k == 32):
-        cv2.imwrite('./my_stereo_images/real_images/'+fileName+'l.jpg',frame[:,:mid])
-        cv2.imwrite('./my_stereo_images/real_images/'+fileName+'r.jpg',frame[:,mid:])
+        cv2.imwrite('./my_stereo_images/real_images/'+fileName+'l.'+fileFormat,frame[:,:mid])
+        cv2.imwrite('./my_stereo_images/real_images/'+fileName+'r.'+fileFormat,frame[:,mid:])
         print('Image ',fileName,' taken!')
 
 
