@@ -24,7 +24,7 @@ def heightWidth(resolution = '720p'):
     elif(resolution == '2.2k' or resolution == 3):
         width = 4416
         height = 1242
-        factor = 0.435
+        factor = 0.4
     return height , width , factor
 
 
