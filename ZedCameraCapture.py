@@ -55,7 +55,7 @@ while True:
     k = cv2.waitKey(1)
     fileName = datetime.now().strftime("%d_%m_%y-%H:%M:%S")
     fileFormats = ['jpg','jpeg','png']
-    fileFormat = fileFormats[0]
+    fileFormat = fileFormats[1]
     if(k == ord('q') or k == 27):
         break
     if(k == 32):
