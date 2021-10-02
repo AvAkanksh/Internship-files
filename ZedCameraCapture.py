@@ -57,8 +57,8 @@ while True:
     if(k == ord('q') or k == 27):
         break
     if(k == 32):
-        cv2.imwrite('./my_stereo_images/real_images/'+fileName+'l.png',frame[:,:mid])
-        cv2.imwrite('./my_stereo_images/real_images/'+fileName+'r.png',frame[:,mid:])
+        cv2.imwrite('./my_stereo_images/real_images/'+fileName+'l.jpg',frame[:,:mid])
+        cv2.imwrite('./my_stereo_images/real_images/'+fileName+'r.jpg',frame[:,mid:])
         print('Image ',fileName,' taken!')
 
 
